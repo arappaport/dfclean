@@ -1,0 +1,62 @@
+#dfclean samples syntax version
+version: 1.0
+
+#if false (the default), only dataframe columns in the columns list are included in the cleaned dataframe.
+# if true, all columns from original dataframe are left in the cleaned dataframe without any changes to content.
+include-unmatched-columns: false
+
+# if 'lower', or 'upper' forces all column names to a consistent case.
+columns-case: lower
+
+columns:
+  # Each column value is the name of the initial column in a dataframe - before any conversion.
+  #  the column name must match exactly, including case sensitivity.
+  #  supported type conversions:
+  #  mandatory - if true: the column must exist in the dataframe.
+  #  rename - Rename the dataframe column the column to the value.Value must not be empty.
+  #   type - type conversion
+  #   datatime   - convert each cell value to a python datetime value.
+  #   8601       - convert to 8601 date string excluding milliseconds
+  #   datestimetring - string of date in format YYYYMMDD-HHMMSS
+  #   datestring - string of date in format YYYY-MM-DD
+  - ID:
+      mandatory:
+      type: int
+
+  - Name:
+      mandatory:
+
+  - Age:
+      mandatory:
+      type: int
+
+  - Added:
+      mandatory: true
+      rename: date-added
+      type: datetime
+
+  - Modified:
+      mandatory: true
+      rename: date-modified
+      type: 8601
+
+  - Modified:
+      mandatory: true
+      rename: date-deleted
+      type: datetimestring
+
+  - Audited:
+      mandatory: true
+      rename: date-audited
+      type: 8601
+
+columns-remove:
+  # Remove immediately before any additional processing.
+  #   it is NOT an error if these are not present.
+  #   must match EXACTLY
+  #    USe case - remove PII or other sensitive data before any additional processing.
+  #       see process_removes()
+  - DOB
+  - SSN
+  - some-extra-column-that-is-not-present
+
