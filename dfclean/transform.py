@@ -40,21 +40,3 @@ def normalise_column(df: pd.DataFrame, column: str) -> pd.DataFrame:
     result[column] = (df[column] - col_min) / (col_max - col_min)
     return result
 
-
-def filter_above_mean(df: pd.DataFrame, column: str) -> pd.DataFrame:
-    """Return rows where *column* is strictly greater than the column mean.
-
-    Args:
-        df:     Source DataFrame.
-        column: Numeric column used as the filter criterion.
-
-    Returns:
-        Filtered DataFrame (new object; *df* is not modified).
-
-    Raises:
-        KeyError: *column* is not present in *df*.
-    """
-    if column not in df.columns:
-        raise KeyError(f"'{column}' not found; available: {list(df.columns)}")
-
-    return df[df[column] > df[column].mean()]

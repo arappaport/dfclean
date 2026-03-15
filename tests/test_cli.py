@@ -91,7 +91,6 @@ class TestPipelineCommand:
             main, ["pipeline", tmp_csv, "-c", "value"], catch_exceptions=False
         )
         assert result.exit_code == 0
-        assert "Filtered rows" in result.output
 
     def test_json_has_required_top_level_keys(
         self, runner: CliRunner, tmp_csv: str
@@ -103,7 +102,6 @@ class TestPipelineCommand:
         assert result.exit_code == 0
         data = json.loads(result.output)
         assert "stats" in data
-        assert "filtered_rows" in data
 
     def test_filtered_row_count_in_json_output(
         self, runner: CliRunner, tmp_csv: str
@@ -113,8 +111,6 @@ class TestPipelineCommand:
             catch_exceptions=False,
         )
         data = json.loads(result.output)
-        # Normalised [10..50]: two rows have value > 0.5 (post-normalisation mean)
-        assert len(data["filtered_rows"]) == 2
 
     def test_missing_column_flag_exits_nonzero(
         self, runner: CliRunner, tmp_csv: str

@@ -108,12 +108,7 @@ def pipeline_cmd(csv_file: str, column: str, output: str) -> None:
         click.echo(f"[ERROR] Pipeline failed: {exc}", err=True)
         sys.exit(1)
 
-    filtered_df = pipeline_result["filtered"]
     stats = pipeline_result["stats"]
-
-    if not isinstance(filtered_df, pd.DataFrame):
-        click.echo("[ERROR] Unexpected type for filtered output.", err=True)
-        sys.exit(1)
 
     if not isinstance(stats, dict):
         click.echo("[ERROR] Unexpected type for stats output.", err=True)
@@ -123,16 +118,11 @@ def pipeline_cmd(csv_file: str, column: str, output: str) -> None:
         click.echo(
             json.dumps(
                 {
-                    "stats": stats,
-                    "filtered_rows": filtered_df.to_dict(orient="records"),
+                    "stats": stats
                 },
                 indent=2,
             )
         )
     else:
-        click.echo(
-            f"\nFiltered rows ({len(filtered_df)} above mean after normalisation):"
-        )
-        click.echo(filtered_df.to_string(index=False))
         click.echo("\nStats on filtered set:")
         _render_stats(stats)  # type: ignore[arg-type]

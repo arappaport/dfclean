@@ -224,9 +224,10 @@ import pandas as pd
 
 from dfclean import (
     describe_dataframe,
-    filter_above_mean,
     normalise_column,
     summary_stats,
+    clean,
+    validate_cfg
 )
 from dfclean.main import run_pipeline
 
@@ -240,11 +241,9 @@ print(describe_dataframe(df))
 # {'price': {...}, 'qty': {...}}
 
 normalised = normalise_column(df, "price")   # returns new DataFrame
-filtered   = filter_above_mean(df, "price")  # rows where price > mean
 
 # Full pipeline in one call
 result = run_pipeline(df, "price")
-print(result["filtered"])   # pd.DataFrame — rows above mean after normalisation
 print(result["stats"])      # nested dict of stats on the filtered subset
 ```
 

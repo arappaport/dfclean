@@ -16,25 +16,19 @@ class TestRunPipeline:
     """run_pipeline: return structure, type contracts, and error propagation."""
 
     def test_return_keys(self, sample_df: pd.DataFrame) -> None:
-        assert set(run_pipeline(sample_df, "value").keys()) == {
+        actual = run_pipeline(sample_df, "value")
+        assert set(actual.keys()) == {
+
             "normalised",
-            "filtered",
             "stats",
         }
 
-    @pytest.mark.parametrize("key", ["normalised", "filtered"])
+    @pytest.mark.parametrize("key", ["normalised"])
     def test_dataframe_outputs(self, sample_df: pd.DataFrame, key: str) -> None:
         assert isinstance(run_pipeline(sample_df, "value")[key], pd.DataFrame)
 
     def test_stats_is_dict(self, sample_df: pd.DataFrame) -> None:
         assert isinstance(run_pipeline(sample_df, "value")["stats"], dict)
-
-    def test_filtered_row_count(self, sample_df: pd.DataFrame) -> None:
-        # Normalised [10..50] → [0, 0.25, 0.5, 0.75, 1.0]; mean = 0.5.
-        # Rows strictly above 0.5: two rows (0.75 and 1.0).
-        result = run_pipeline(sample_df, "value")
-        assert isinstance(result["filtered"], pd.DataFrame)
-        assert len(result["filtered"]) == 2
 
     def test_input_not_mutated(self, sample_df: pd.DataFrame) -> None:
         original = sample_df["value"].tolist()

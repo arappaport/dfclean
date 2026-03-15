@@ -9,7 +9,7 @@ from __future__ import annotations
 import pandas as pd
 
 from dfclean.stats import describe_dataframe
-from dfclean.transform import filter_above_mean, normalise_column
+from dfclean.transform import normalise_column
 
 
 def run_pipeline(df: pd.DataFrame, column: str) -> dict[str, object]:
@@ -33,9 +33,8 @@ def run_pipeline(df: pd.DataFrame, column: str) -> dict[str, object]:
         ValueError: *column* has zero variance.
     """
     normalised = normalise_column(df, column)
-    filtered = filter_above_mean(normalised, column)
-    stats = describe_dataframe(filtered)
-    return {"normalised": normalised, "filtered": filtered, "stats": stats}
+    stats = describe_dataframe(normalised)
+    return {"normalised": normalised, "stats": stats}
 
 
 if __name__ == "__main__":  # pragma: no cover
