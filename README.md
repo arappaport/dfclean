@@ -42,7 +42,7 @@ It supports:
 ## Installation
 
 ```bash
-git clone https://github.com/yourorg/dfclean.git
+git clone https://github.com/arappaport/dfclean.git
 cd dfclean
 
 # Install runtime + all dev dependencies (includes click for the CLI)
@@ -212,32 +212,6 @@ nox -s tests-3.13 -- -k "zero_variance" -v
 nox -s tests     # runs 3.11, 3.12, 3.13 sequentially
 ```
 
----
-
-## Development workflow
-
-```bash
-# 1. Install everything and wire up git hooks
-poetry install --with dev
-pre-commit install
-
-# 2. Make your changes
-
-# 3. Auto-format before committing
-nox -s format
-
-# 4. Run the full local gate
-nox -s ci
-
-# 5. (Optional) Run the full Python version matrix
-nox -s tests
-
-# 6. Commit — pre-commit runs ruff automatically
-git add .
-git commit -m "feat: describe your change"
-
-# 7. Update CHANGELOG.md under [Unreleased] before opening a PR
-```
 
 ---
 
