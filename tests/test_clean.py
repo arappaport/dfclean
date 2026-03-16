@@ -377,8 +377,11 @@ class TestTypeCoercionPandas:
         result = clean(base_df, base_cfg)
         assert result["col1-new"].iloc[0] == pd.Timestamp("2024-01-01")
 
+
+    #note - this isn't a valid test.  somehow the "1"'s are already converted when
+    #  the df is loaded.
     def test_int_coercion(self):
-        df = pd.DataFrame({"qty": ["1", "2", "3"]})
+        df = pd.DataFrame({"qty": ["1", "2", "3", "4"]})
         cfg = {
             "version": 1.0, "include-unmatched-columns": False,
             "columns": [{"qty": {"type": "int"}}],

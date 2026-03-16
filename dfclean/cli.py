@@ -16,9 +16,6 @@ import sys
 import click
 import pandas as pd
 
-from dfclean.main import run_pipeline
-from dfclean.stats import describe_dataframe, summary_stats
-
 try:
     _VERSION = importlib.metadata.version("dfclean")
 except importlib.metadata.PackageNotFoundError:

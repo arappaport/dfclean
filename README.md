@@ -17,11 +17,13 @@ dfclean.clean() is driven from an external configuration file.    See ./samples/
 
 It supports: 
  * Verify mandatory columns
- * Type conversions.   Convert datetimes to 8601 or other common dateformats, floats to int/
+ * Type conversions. Convert datetimes to strings: 8601 or other common dateformats, floats to int/
  * Renaming columns
  * Removing columns early in processing - example - remove any PI columns
  
 
+### Pandas built-in type conversion
+* https://pandas.pydata.org/docs/user_guide/io.html#csv-text-files
 
 
 ## Prerequisites
@@ -263,3 +265,13 @@ print(result["stats"])      # nested dict of stats on the filtered subset
 ## License
 
 [MIT](LICENSE)
+
+
+##TODO's
+1. X - evaluate if normalize and stats are needed.  NO Dry it up. Also remove pipeline.  Keep clean and validate_cfg only
+2.  X Add links for default read_csv behavior in README
+3. Add a sample run.py to samples.    load, validate, print
+3. Decide on type's behavior. KISS.  SHould it convert strings to int? Should type convert floats to int.
+5. Decision on load_cfg.   The file check is useful.  But the load is not single purpose.
+   *   move to util.  check_file.     include OS full path. 
+   * NO exceptions.   return useful error string.   Take logger. 

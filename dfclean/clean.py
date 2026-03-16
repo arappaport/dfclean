@@ -240,7 +240,7 @@ def _coerce_series_type(
     Raises:
         ValueError: If the conversion fails.
     """
-    normalised = col_type.strip().lower()
+    normalised = str(col_type).strip().lower()
 
     # ------------------------------------------------------------------
     # Custom types

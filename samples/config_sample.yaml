@@ -28,7 +28,7 @@ columns:
 
   - Age:
       mandatory:
-      type: int
+      type: int64
 
   - Added:
       mandatory: true
@@ -40,7 +40,7 @@ columns:
       rename: date-modified
       type: 8601
 
-  - Modified:
+  - Deleted:
       mandatory: true
       rename: date-deleted
       type: datetimestring
