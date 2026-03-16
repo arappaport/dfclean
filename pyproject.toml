@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dfclean"
-version = "0.1.1"
+version = "0.1.2"
 description = "A production-quality DataFrame cleaning and statistics library with a Click CLI."
 # TODO: replace author name and email before publishing
 authors = ["Your Name <you@example.com>"]

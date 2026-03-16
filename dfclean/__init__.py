@@ -8,7 +8,7 @@ from dfclean.process_removes import process_removes
 from dfclean.validate_cfg import validate_cfg
 from dfclean.util import check_file
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 __all__ = [
     "__version__",
