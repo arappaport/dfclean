@@ -21,19 +21,19 @@ columns:
   #   datestring - string of date in format YYYY-MM-DD
   - ID:
       mandatory:
-      type: int
+      #type: int
 
   - Name:
       mandatory:
 
   - Age:
       mandatory:
-      type: int64
+      #type: int
 
   - Added:
       mandatory: true
       rename: date-added
-      type: datetime
+      type: 8601
 
   - Modified:
       mandatory: true
