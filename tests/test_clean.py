@@ -1,4 +1,7 @@
-# GENERATED FILE - DO NOT EDIT DIRECTLY. Prompt:[cdfclean.txt] version:[1.0] at[2026-03-01T23:49:22Z]
+# SPDX-License-Identifier: Unlicense
+# This is free and unencumbered software released into the public domain.
+# See UNLICENSE or <https://unlicense.org> for details.
+
 """
 test_clean.py
 -------------

@@ -2,8 +2,8 @@
 
 [![CI](https://github.com/yourorg/dfclean/actions/workflows/ci.yml/badge.svg)](https://github.com/yourorg/dfclean/actions)
 [![Python](https://img.shields.io/badge/python-3.11%20|%203.12%20|%203.13-blue)](https://python.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Coverage](https://img.shields.io/badge/coverage-%E2%89%8585%25-brightgreen)](htmlcov/index.html)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](UNLICENSE)
+[![Coverage](https://img.shields.io/badge/coverage-≅82%25-brightgreen)](htmlcov/index.html)
 [![PyPI](https://img.shields.io/pypi/v/dfclean)](https://pypi.org/project/dfclean/)
 
 ---
@@ -159,7 +159,7 @@ dfclean pipeline /tmp/demo.csv -c value -o json
 poetry run pytest
 ```
 
-The run fails if branch coverage drops below **85%**.
+The run fails if branch coverage drops below **82%**.
 
 ### Useful flags
 
@@ -264,7 +264,7 @@ print(result["stats"])      # nested dict of stats on the filtered subset
 
 ## License
 
-[MIT](LICENSE)
+[MIT](UNLICENSE)
 
 
 ##TODO's

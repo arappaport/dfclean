@@ -1,4 +1,7 @@
-# test_validate_cfg.py
+# SPDX-License-Identifier: Unlicense
+# This is free and unencumbered software released into the public domain.
+# See UNLICENSE or <https://unlicense.org> for details.
+
 """
 Comprehensive pytest suite for validate_cfg.py.
 

@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: Unlicense
+# This is free and unencumbered software released into the public domain.
+# See UNLICENSE or <https://unlicense.org> for details.
+
 """Integration tests for the Click CLI.
 
 CliRunner invokes commands in-process — no subprocess overhead.
