@@ -2,11 +2,11 @@
 # This is free and unencumbered software released into the public domain.
 # See UNLICENSE or <https://unlicense.org> for details.
 
-# GENERATED FILE - DO NOT EDIT DIRECTLY. Prompt:[cdfclean.txt] version:[1.0] at[2026-03-01T23:49:22Z]
+# GENERATED FILE - DO NOT EDIT DIRECTLY. Prompt:[cdftidy.txt] version:[1.0] at[2026-03-01T23:49:22Z]
 """
 clean.py
 --------
-Production-grade DataFrame cleaning function driven by a dfclean YAML samples.
+Production-grade DataFrame cleaning function driven by a dftidy YAML samples.
 
 Supported samples syntax version: 1.0
 
@@ -69,11 +69,11 @@ def _validate_version(cfg: dict) -> None:
         version = float(raw)
     except (TypeError, ValueError):
         raise ValueError(
-            f"Only dfclean samples version 1.0 is supported, got: {raw!r}"
+            f"Only dftidy samples version 1.0 is supported, got: {raw!r}"
         )
     if version != SUPPORTED_VERSION:
         raise ValueError(
-            f"Only dfclean samples version 1.0 is supported, got: {version}"
+            f"Only dftidy samples version 1.0 is supported, got: {version}"
         )
 
 
@@ -291,7 +291,7 @@ def clean(
     cfg: dict,
     inplace: bool = False,
 ) -> Optional[pd.DataFrame]:
-    """Clean and validate a pandas DataFrame using a dfclean YAML samples.
+    """Clean and validate a pandas DataFrame using a dftidy YAML samples.
 
     Operations performed in order:
 
@@ -311,7 +311,7 @@ def clean(
 
     Args:
         df: Source pandas DataFrame to clean.
-        cfg: Python dict produced by ``yaml.safe_load()`` on a dfclean
+        cfg: Python dict produced by ``yaml.safe_load()`` on a dftidy
             samples file.
         inplace: If ``True``, mutate *df* in place and return ``None``.
             If ``False`` (default), operate on a copy and return it.
@@ -367,7 +367,7 @@ def clean(
     cfg_col_names: list[str] = [name for name, _ in col_defs]
 
     log.info(
-        "dfclean: %d column(s) in samples | include-unmatched-columns=%s",
+        "dftidy: %d column(s) in samples | include-unmatched-columns=%s",
         len(cfg_col_names),
         include_unmatched,
     )
