@@ -22,6 +22,12 @@ import pandas as pd
 import json
 import dftidy
 
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+
 LOGGER = logging.getLogger(__name__)
 
 CSV_ORIG_PATH              = Path("samples/data_sample.csv")
