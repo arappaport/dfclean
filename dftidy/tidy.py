@@ -289,15 +289,16 @@ def _coerce_series_type(
 def tidy(
     df: pd.DataFrame,
     cfg: dict,
-    inplace: bool = False,
-) -> Optional[pd.DataFrame]:
+) -> pd.DataFrame:
     """Tidy and validate a pandas DataFrame using a dftidy YAML samples.
+
+    Always operates on a copy of *df*; the original is never modified.
 
     Operations performed in order:
 
-    1. Type-validates all three arguments.
+    1. Type-validates both arguments.
     2. Validates samples version (only ``1.0`` supported).
-    3. Reads ``include-unmatched-columns`` (defaults to ``False``).
+    3. Reads ``include-unmatched-columns`` (defaults to ``True``).
     4. Parses ordered column definitions from ``cfg["columns"]``.
     5. For each defined column:
 
@@ -313,27 +314,26 @@ def tidy(
         df: Source pandas DataFrame to tidy.
         cfg: Python dict produced by ``yaml.safe_load()`` on a dftidy
             samples file.
-        inplace: If ``True``, mutate *df* in place and return ``None``.
-            If ``False`` (default), operate on a copy and return it.
 
     Returns:
-        Tidied ``pd.DataFrame`` when ``inplace=False``, or ``None`` when
-        ``inplace=True``.
+        Tidied copy of *df*.
 
     Raises:
         TypeError: If *df* is not a ``pd.DataFrame``, *cfg* is not a ``dict``,
-            *inplace* is not a ``bool``, or a samples value has the wrong type.
+            or a samples value has the wrong type.
         ValueError: If the samples version is unsupported, a rename target is
             invalid, or type coercion fails.
         KeyError: If a mandatory column is absent from the DataFrame.
 
     Example::
 
-        import yaml, pandas as pd
+        import yaml
+        import pandas as pd
         from tidy import tidy
 
-        cfg = yaml.safe_load(open("sample.yaml"))
-        df  = pd.DataFrame({
+        with open("sample.yaml") as fh:
+            cfg = yaml.safe_load(fh)
+        df = pd.DataFrame({
             "col1": ["2024-01-01"],
             "col2": ["2023-06-15"],
             "col3": ["2022-03-10"],
@@ -353,10 +353,6 @@ def tidy(
         raise TypeError(
             f"'cfg' must be a dict, got {type(cfg).__name__!r}."
         )
-    if not isinstance(inplace, bool):
-        raise TypeError(
-            f"'inplace' must be a bool, got {type(inplace).__name__!r}."
-        )
 
     # ------------------------------------------------------------------
     # 2. Config-level validation
@@ -373,9 +369,9 @@ def tidy(
     )
 
     # ------------------------------------------------------------------
-    # 3. Work on a copy unless inplace
+    # 3. Work on a copy
     # ------------------------------------------------------------------
-    target: pd.DataFrame = df if inplace else df.copy()
+    target: pd.DataFrame = df.copy()
 
     # ------------------------------------------------------------------
     # 4. Per-column: mandatory → coerce → collect rename
@@ -467,7 +463,4 @@ def tidy(
     # ------------------------------------------------------------------
     # 7. Return
     # ------------------------------------------------------------------
-    if inplace:
-        df.__dict__.update(target.__dict__)
-        return None
     return target

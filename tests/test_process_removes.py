@@ -314,4 +314,4 @@ class TestProcessRemoves:
     def test_dtypes_preserved(self):
         df = pd.DataFrame({"a": pd.array([1], dtype="int32"), "b": ["x"]})
         result = process_removes(df, {"remove": ["a"]})
-        assert result["b"].dtype == object
+        assert pd.api.types.is_string_dtype(result["b"])
